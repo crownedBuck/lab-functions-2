@@ -162,6 +162,8 @@ Let's invoke the 'multiplyingFactory' function that will return another function
 
 // CODE HERE
 
+console.log("-----------")
+
 // const timesFour = multiplyingFactory(3)
 
 /* 

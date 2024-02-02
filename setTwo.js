@@ -131,14 +131,20 @@ contains(names, 'Colt', result => {
 
 const uniq = (anArray, callback) => {
   for (let loopingNumber = 0; loopingNumber < anArray.length; loopingNumber++) {
-    for (let loopingNumberAgain = 0; loopingNumberAgain < anArray.length; loopingNumberAgain++) {
-      if (loopingNumber ==! loopingNumberAgain && anArray[loopingNumber] === anArray[loopingNumberAgain]) {
-        anArray.splice(loopingNumberAgain - 1, 1)
+    for (let loopingNumberAgain = loopingNumber+1; loopingNumberAgain < anArray.length; loopingNumberAgain++) {
+
+      console.log(anArray[loopingNumber] + " in " + loopingNumber + " and " + anArray[loopingNumberAgain] + " in " + loopingNumberAgain)
+      // console.log(loopingNumberAgain)
+      if (anArray[loopingNumber] === anArray[loopingNumberAgain]) {
+        console.log("I'm called! " + anArray[loopingNumber])
+        anArray.splice(loopingNumberAgain, 1)
       }
     }
   }
 
   callback(anArray)
+
+  // console.log(anArray)
 }
 
 /*
@@ -212,6 +218,15 @@ each(names, function namesArray(item, index) {
 
 // CODE HERE
 
+const addingFactory = (number) => {
+   return function takeAnotherNumber(anothernumber) {
+    return anothernumber + number;
+  }
+}
+
+const numbers = addingFactory(15)
+
+console.log(numbers(10))
 
 /*
   Now that you have addingFactory, you can create other
@@ -227,6 +242,12 @@ each(names, function namesArray(item, index) {
 
 // CODE HERE
 
+// const newVarialbe = addingFactory()
+
+const addTen = addingFactory(10)
+
+// console.log(newVarialbe(10))
+
 /*
   Now the inner function is stored in the addTen variable! 
 
@@ -238,6 +259,8 @@ each(names, function namesArray(item, index) {
 */
 
 // CODE HERE
+
+console.log(addTen(33))
 
 /*
   Let's make another function from the addingFactory. 
@@ -252,6 +275,9 @@ each(names, function namesArray(item, index) {
 
 // CODE HERE
 
+const addNumber = addingFactory(14)
+
+console.log(addNumber(9))
 
 
 
@@ -288,12 +314,18 @@ var users = [
 
 // CODE HERE 
 
-
+const getUserById = (usersArray, idArgument, callback) => {
+  for (let loopingNumber = 0; loopingNumber < usersArray.length; loopingNumber++) {
+    if (idArgument === usersArray[loopingNumber].id) {
+      callback(usersArray[loopingNumber])
+    }
+  }
+}
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// getUserById(users, '16t', user => {
-//   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
-// })
+getUserById(users, '16t', user => {
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
+})
